@@ -12,12 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(/*Validate_task $request*/)
     {
-        //
         //echo "<h1>List Task</h1>";
         // pour afficher chaque user ces taches specifique
         // User::create([
@@ -25,15 +21,9 @@ class TaskController extends Controller
         //     'email' => 'sourouya@gmail.com',
         //     'role'=>'admin',
         //     'password'=>Hash::make('sourouya')
-
         // ]);
 
-
-        
-
         // dd(Auth::user()->id);
-
-
         if (isset(Auth::user()->id)) {
             $contenu=Task::All()->where('id_user','=',Auth::user()->id);
         } else {
@@ -41,26 +31,10 @@ class TaskController extends Controller
         }
        
         $title="listes de taches";
-
         // dump(Auth::user());
-       
         return  view('tasks.index',compact('contenu','title'));
 
-        // $validation=validator([
-        //     'nom'=>'Az',
-        //     'age'=>19
-
-        // ],[
-        //     'nom'=>['required','min:3'],
-        //     'age'=>'integer|required|min:18|max:55'
-        // ],[
-        //     'nom.required'=>'votre champs est requise',
-        //     'nom.min'=>'la taille doit etre superieur a 3'
-        // ]);
-
-       
-       // dd($validation->validated());
-        //dd($request->validated());
+        
 
     }
 

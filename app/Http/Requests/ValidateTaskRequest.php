@@ -27,6 +27,21 @@ class ValidateTaskRequest extends FormRequest
      */
     public function rules(): array
     {
+        // $validation=validator([
+        //     'nom'=>'Az',
+        //     'age'=>19
+
+        // ],[
+        //     'nom'=>['required','min:3'],
+        //     'age'=>'integer|required|min:18|max:55'
+        // ],[
+        //     'nom.required'=>'votre champs est requise',
+        //     'nom.min'=>'la taille doit etre superieur a 3'
+        // ]);
+
+       
+       // dd($validation->validated());
+        //dd($request->validated());
         return [
             'title'=>['required','min:3',Rule::unique('tasks')->ignore($this->id)],
             'status'=>'in:0,1',
