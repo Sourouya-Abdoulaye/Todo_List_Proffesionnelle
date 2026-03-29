@@ -7,14 +7,31 @@
 
       <!-- Menu -->
       <nav class="flex-1 flex flex-col gap-3">
-        <a href="/" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+        <a href="{{ route('dashboard')}}" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+          <span>👤</span>
+          <span>Statistique</span>
+        </a>
+
+        <!-- <a href="/" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
           <span>🏠</span>
           <span>Tâches</span>
+        </a> -->
+
+        <a href="/admin/tasks" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+          <span>🏠</span>
+          <span>Mes tâches</span>
         </a>
-        <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+
+        <a href="{{ route('admin.users')}}" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+          <span>👤</span>
+          <span>Users</span>
+        </a>
+
+        
+        <!-- <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
           <span>👤</span>
           <span>Profil</span>
-        </a>
+        </a> -->
         <a href="#" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
           <span>⚙️</span>
           <span>Paramètres</span>
@@ -38,62 +55,14 @@
 
     <!-- Contenu -->
     <main class="flex-1 p-4 md:p-8 min-w-0">
-      <div class="bg-white dark:bg-gray-800 shadow-xl rounded-xl p-6">
-        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">Dashboard</h1>
-        <!-- <p class="mb-6 text-gray-700 dark:text-gray-300">{{ __("You're logged in!") }}</p> -->
-
-        <div class="overflow-x-auto w-full">
-          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead class="bg-green-700 text-white">
-              <tr>
-                <th class="px-4 py-3 text-left text-sm font-semibold">ID</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold">Email</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold">Role</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold">Created At</th>
-                <th class="px-4 py-3 text-left text-sm font-semibold">Updated At</th>
-                <th class="px-4 py-3 text-center text-sm font-semibold">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
-              @foreach($users as $user)
-                <tr class="hover:bg-green-100 dark:hover:bg-green-600 transition">
-                  <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{{$user->id}}</td>
-                  <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{{$user->name}}</td>
-                  <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{{$user->email}}</td>
-                  <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{{$user->role}}</td>
-                  <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">{{$user->created_at}}</td>
-                  <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">{{$user->updated_at}}</td>
-                  <td class="px-4 py-2 flex justify-between gap-2  ">
-
-                    <a href="/users/{{$user->id}}/show"
-                       class="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm transition">
-                       👁️ Show
-                    </a>
-
-                    <a href="/users/{{$user->id}}/edit"
-                       onclick="return confirm('Voulez vous modifier cet utilisateur ?');"
-                       class="flex items-center gap-1 px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm transition">
-                       ✏️ Update
-                    </a>
-
-                    <form action="/users/{{$user->id}}/delete" method="POST"
-                          onsubmit="return confirm('Supprimer cet utilisateur ?');">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit"
-                              class="flex items-center gap-1 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-sm transition">
-                        🗑️ Delete
-                      </button>
-                    </form>
-
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
+      <div>
+           @yield('search_bare')
       </div>
+     <div>
+        @yield('contenu')
+     </div>
+      
+      
     </main>
   </div>
 
@@ -104,5 +73,31 @@
     toggleBtn.addEventListener('click', () => {
       sidebar.classList.toggle('hidden');
     });
+
+
+
+    //ce que j'ai ajouter
+        // Dark mode toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('dark-toggle');
+            toggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+
+                // Changer le texte du bouton si tu veux
+                if (document.documentElement.classList.contains('dark')) {
+                    toggleBtn.textContent = '☀️ ';
+                } else {
+                    toggleBtn.textContent = '🌙 ';
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        // const menuBtn = document.getElementById('mobile-menu-button');
+        // const menu = document.getElementById('mobile-menu');
+        // menuBtn.addEventListener('click', () => {
+        //     menu.classList.toggle('hidden');
+        // });
+    
   </script>
 </x-app-layout>

@@ -1,8 +1,8 @@
 @extends('base')
 @vite('resources/css/app.css')
-@section('remplire')
+@section('contenu')
 
-<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
+<div class="max-w-md break-words mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
 
     <h2 class="text-2xl font-bold text-green-600 mb-6">Détail de la tâche</h2>
 
@@ -11,7 +11,7 @@
         <span class="text-gray-800 ml-2">{{$contenu->id}}</span>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 ">
         <span class="font-semibold text-gray-700">Title :</span>
         <span class="text-gray-800 ml-2">{{$contenu->title}}</span>
     </div>

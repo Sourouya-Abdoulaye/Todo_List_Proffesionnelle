@@ -29,7 +29,7 @@
         <div id="mobile-menu" class="hidden md:flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-0">
             @auth
             @if(auth()->user()->role === 'admin')
-            <a href="{{ route('dashboard') }}" class="px-3 py-1 rounded hover:bg-green-600 dark:hover:bg-gray-700 transition">Dashboard</a>
+            <a href="/admin/users" class="px-3 py-1 rounded hover:bg-green-600 dark:hover:bg-gray-700 transition">Dashboard</a>
             @endif
             @endauth
 
@@ -64,7 +64,7 @@
     @yield('search_bare')
 
     <div class="max-w-full mx-auto px-4">
-        @yield('remplire')
+        @yield('contenu')
     </div>
 
     <script>

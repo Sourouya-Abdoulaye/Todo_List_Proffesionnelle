@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('remplire')
+@section('contenu')
 <div class="max-w-md mx-auto mt-12 bg-white p-8 rounded-lg shadow-lg">
 
     <h2 class="text-2xl font-bold text-green-600 text-center mb-6">Modifier la tâche</h2>
