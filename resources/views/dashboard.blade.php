@@ -12,10 +12,10 @@
           <span>Statistique</span>
         </a>
 
-        <!-- <a href="/" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
+        <a href="/" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
           <span>🏠</span>
-          <span>Tâches</span>
-        </a> -->
+          <span>Acceuil</span>
+        </a>
 
         <a href="/admin/tasks" class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-green-600 transition">
           <span>🏠</span>

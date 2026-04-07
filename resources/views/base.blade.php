@@ -88,6 +88,9 @@
         const menu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
+            menu.classList.toggle('flex',
+            'text-red','md:px-8','py-3','md:flex-row');
+            
         });
     </script>
 </body>

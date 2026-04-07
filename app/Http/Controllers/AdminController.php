@@ -13,7 +13,9 @@ class AdminController extends Controller
     //les statistique
     public function index() {
         if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
-            return view('admin.index');
+            $tasks = Task::orderBy('created_at','desc')->get();
+            $users = User::all();
+            return view('admin.index', compact('tasks', 'users'));
         }
 
         return redirect('/');
@@ -22,7 +24,7 @@ class AdminController extends Controller
 
     public function tasks() {
         if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
-            $contenu=Task::all()->where('id',Auth::user()->id);
+            $contenu=Task::all()->where('id_user',Auth::user()->id);
             $title='admin tasks';
             return view('admin.task',compact('contenu','title'));
         }
@@ -42,6 +44,70 @@ class AdminController extends Controller
 
         return redirect('/');
     }
+
+
+    public function editUser($id) {
+        if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
+            $user=User::findOrFail($id);
+            return view('admin.updateForm',compact('user'));
+
+        }
+
+        return route('dashboard');
+    }
+
+
+    public function showUser($id) {
+        if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
+            $user=User::findOrFail($id);
+            $tasks=Task::all()->where('id_user',$id);
+            $title='detail utilisateur';
+            return view('admin.showUser',compact('user','title','tasks'));
+
+        }
+
+        return route('dashboard');
+    }
+
+    public function updateUser(Request $request,$id) {
+        if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
+            $user=User::findOrFail($id);
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->role=$request->role;
+            $user->save();
+            return redirect()->route('admin.users');
+
+        }
+
+        return route('dashboard');
+    }
+
+
+    public function destroyUser($id) {
+        if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
+            $user=User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('admin.users');
+
+        }
+
+        return route('dashboard');
+    }
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -42,18 +42,19 @@
                     <td class="px-4 py-2 text-sm text-gray-500 dark:text-gray-300">{{$user->updated_at}}</td>
                     <td class="px-4 py-2 flex justify-between gap-2  ">
 
-                        <a href="/users/{{$user->id}}/show"
+                        <a href="{{ route('admin.user.show', ['id' => $user->id]) }}"
+                        onclick="return confirm('Voulez vous voir les detail cet utilisateur ?');"
                             class="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm transition">
                             👁️ Show
                         </a>
 
-                        <!-- <a href="/users/{{$user->id}}/edit"
-                       onclick="return confirm('Voulez vous modifier cet utilisateur ?');"
-                       class="flex items-center gap-1 px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm transition">
-                       ✏️ Update
-                    </a> -->
+                        <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}"
+                            onclick="return confirm('Voulez vous modifier cet utilisateur ?');"
+                            class="flex items-center gap-1 px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm transition">
+                            ✏️ Update
+                        </a>
 
-                        <form action="/users/{{$user->id}}/delete" method="POST"
+                        <form action="{{ route('admin.user.delete', ['id' => $user->id]) }}" method="POST"
                             onsubmit="return confirm('Supprimer cet utilisateur ?');">
                             @csrf
                             @method('DELETE')

@@ -48,8 +48,7 @@
         </thead>
         <tbody id="table-body" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
 
-            @if (isset($_GET['status']) && ( in_array($_GET['status'],[0,1] ) && $contenu !=[] || ( $_GET['status']!=1
-            && $_GET['status']!=0)))
+            @if (isset($_GET['status']) && ( in_array($_GET['status'],[0,1] ) && $contenu !=[] || ( $_GET['status']!=1 && $_GET['status']!=0)))
             
             @foreach($contenu as $task)
             @if ($task->status == $_GET['status'])

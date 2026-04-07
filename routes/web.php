@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/',[TaskController::class,'index'] )->name('liste.task');
-
 Route::middleware(['auth','verified'])->group( function () {
     Route::get('/{id}/show',[TaskController::class,'show'])->where('id','[1-9]+')->name('show.task');
     Route::get('/create',[TaskController::class,'create'])->name('create.task')->middleware(['auth','verified']);
@@ -31,25 +30,30 @@ Route::middleware(['auth','verified'])->group( function () {
 
 
 
-// Route::prefix('admin')->group( function () {
-    // != car Auth::user()->role retourne: null
-    // dd(Auth::user()->role);
-    // if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
 
-    Route::get('/admin',[AdminController::class, 'index'])->name('dashboard');
-    Route::get('/admin/tasks',[AdminController::class, 'tasks'])->name('admin.tasks');
-    Route::get('/admin/users',[AdminController::class, 'users'])->name('admin.users');
-
-    // }
-    // return  to_route('liste.task');
-
-// })->middleware(['auth', 'verified'])->name('admin');
-
-
+// dd(Auth::user()->role);
+// if (isset(Auth::user()->role) && Auth::user()->role == 'admin') {
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+
+Route::get('/admin',[AdminController::class, 'index'])->name('dashboard');
+Route::get('/admin/tasks',[AdminController::class, 'tasks'])->name('admin.tasks');
+// users
+Route::get('/admin/users',[AdminController::class, 'users'])->name('admin.users');
+Route::get('/admin/user/{id}/show',[AdminController::class, 'showUser'])->name('admin.user.show');
+Route::get('/admin/user/{id}/edit',[AdminController::class, 'editUser'])->name('admin.user.edit');
+
+
+Route::put('/admin/user/{id}/update',[AdminController::class, 'updateUser'])->name('admin.user.update');
+Route::delete('/admin/user/{id}/delete', [AdminController::class, 'destroyUser'])->name('admin.user.delete');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
